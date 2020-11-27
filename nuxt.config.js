@@ -46,7 +46,7 @@ export default {
       name: "PWA file receive",
       short_name: "PWA file",
       share_target: {
-        action: "/_share-target",
+        action: "/share",
         enctype: "multipart/form-data",
         method: "POST",
         params: {
@@ -60,6 +60,11 @@ export default {
           }]
         }
       }
+    },
+    workbox: {
+      importScripts: [
+        'custom-sw.js'
+      ],
     }
   }
 }
