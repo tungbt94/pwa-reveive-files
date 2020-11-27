@@ -3,9 +3,13 @@ const urlPrefix = '/_media/'
 const shareUrl = ['/share']
 
 self.addEventListener('fetch', event => {
+  // if (event.request.cache === 'only-if-cached' && event.request.mode !== 'same-origin') {
+  //   return
+  // }
   if (event.request.method !== 'POST') {
-    event.respondWith(fetch(event.request))
-    return
+    if (caches.match(event.request))
+      return event.respondWith(caches.match(event.request))
+    return event.respondWith(fetch(event.request))
   }
 
   console.log('event:', event)

@@ -1,6 +1,6 @@
 <template>
   <div>
-    Share page
+    <img  v-for="image in images" :key="image.src" :src="image.src" alt="img" />
   </div>
 </template>
 
@@ -8,12 +8,18 @@
 import { getCachedMediaMetadata } from '@@/utils/getCachedMediaMetadata'
 
 export default {
+  data() {
+    return {
+      images: []
+    }
+  },
+
   async mounted() {
     const mimePrefix = 'image/'
-    const cachedMediaMetadataPromise = getCachedMediaMetadata(mimePrefix)
-    console.log('share >> mounted >> cachedMediaMetadataPromise:', cachedMediaMetadataPromise)
-    const cachedMediaMetadatas = await cachedMediaMetadataPromise()
+    const cachedMediaMetadatas = await getCachedMediaMetadata(mimePrefix)
     console.log('share >> mounted >> cachedMediaMetadatas:', cachedMediaMetadatas)
+    this.images = cachedMediaMetadatas
+
   }
 }
 </script>
