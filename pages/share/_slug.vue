@@ -1,17 +1,13 @@
 <template>
   <div>
-    <img
-      v-if="type === 'image'"
-      :src="media.src"
-      alt="img"
-    >
+    <img v-if="type === 'image'" :src="media.src" alt="img" />
     <video
       v-if="type === 'video'"
       :src="media.src"
       width="360"
       controls
       autoplay
-    >
+    />
   </div>
 </template>
 
@@ -27,7 +23,6 @@ export default {
   },
 
   async mounted() {
-    console.log(this.$route)
     const mimePrefix = this.$route.params.slug
     this.type = mimePrefix
     const cachedMediaMetadatas = await getCachedMediaMetadata(mimePrefix)

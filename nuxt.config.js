@@ -43,28 +43,24 @@ export default {
 
   pwa: {
     manifest: {
-      name: "PWA file receive",
-      short_name: "PWA file",
+      name: 'PWA file receive',
+      short_name: 'PWA file',
       share_target: {
-        action: "/share",
-        enctype: "multipart/form-data",
-        method: "POST",
+        action: '/share',
+        enctype: 'multipart/form-data',
+        method: 'POST',
         params: {
-          files: [{
-            name: "media",
-            accept: [
-              "audio/*",
-              "image/*",
-              "video/*"
-            ]
-          }]
-        }
-      }
+          files: [
+            {
+              name: 'media',
+              accept: ['audio/*', 'image/*', 'video/*'],
+            },
+          ],
+        },
+      },
     },
     workbox: {
-      importScripts: [
-        'custom-sw.js'
-      ],
-    }
-  }
+      importScripts: ['custom-sw.js'],
+    },
+  },
 }

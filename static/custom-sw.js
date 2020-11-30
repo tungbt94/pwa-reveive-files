@@ -3,28 +3,23 @@ const urlPrefix = '/_media/'
 const shareUrl = '/share'
 
 self.addEventListener('fetch', (event) => {
-  console.log('event:', event)
   const isCacheType = ['image', 'video'].includes(event.request.destination)
   const loadFromCache = event.request.cache === 'default' && isCacheType
   if (loadFromCache) {
     return event.respondWith(caches.match(event.request))
   }
   if (event.request.method !== 'POST') {
-    console.log('fetch(event.request):', fetch(event.request))
     return event.respondWith(fetch(event.request))
   }
 
   event.respondWith(
     (async () => {
       const formData = await event.request.formData()
-      console.log('formData:', formData)
       const mediaFiles = formData.getAll('media')
-      console.log('mediaFiles:', mediaFiles)
 
       const cache = await caches.open(cacheName)
       for (const mediaFile of mediaFiles) {
         if (!mediaFile.name) {
-          console.log('No media file name')
           continue
         }
 
